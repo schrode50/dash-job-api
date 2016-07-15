@@ -57,22 +57,22 @@ eventRouter.post('/', bodyParser, jwtAuth, (req, res, next) => {
   let newEvent = new Event(req.body);
 
   newEvent.save((err, events) => {
-    console.log("new event", events);
-    console.log("--------------------");
+    console.log('new event', events);
+    console.log('--------------------');
     if (err) return next(new Error(err));
     Job.find({
       _id: req.body.jobId
     }, (err, data) => {
-      console.log("found", data);
-      console.log("--------------------");
+      console.log('found', data);
+      console.log('--------------------');
       updateStatusValue(data, function (job) {
-        console.log("updated", job);
-        console.log("--------------------");
+        console.log('updated', job);
+        console.log('--------------------');
         Job.findOneAndUpdate({
           _id: job[0]._id
         }, job[0], (err, data) => {
-          console.log("saved job", data);
-          console.log("--------------------");
+          console.log('saved job', data);
+          console.log('--------------------');
           res.json(events);
         });
       });
